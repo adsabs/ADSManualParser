@@ -7,7 +7,9 @@ _API_MAX_RETRIES = 1
 _API_RETRY_SLEEP = 1
 
 DEPRECATED_TITLES = [
+    r"^Acknowledgements",
     r"^Index$",
+    r"Index",
     r"^Index\sto\svolume",
     r"^Index\sto\sadverstiser",
     r"^Index\sof\sauthors",
@@ -65,6 +67,7 @@ DEPRECATED_TITLES = [
     r"^[OI][BF]C",
     r"Forthcoming\smeeting",
     r"advertisement",
+    r"Front\smatter",
     r"Frontmatter",
     r"Front\scover",
     r"Front-cover",
@@ -90,4 +93,9 @@ DEPRECATED_TITLES = [
     r"^Title\/Ed\sboard",
     r"^Title\sEditorial\sBoard",
     r"^Editorial\sAdvisory\sBoard",
+    r"^References",
+    r"Reviewers",
+    r"Contributors",
+    r"Contibutors",
+    r"About the Editor",
 ]
