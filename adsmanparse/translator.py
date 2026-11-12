@@ -177,6 +177,9 @@ class Translator(object):
         keywords = self.data.get("keywords", None)
         keyword_list = []
         uat_list = []
+        # check whether *any* UAT keywords are present, and if so,
+        # toss non-UAT keywords and only use %U and not %K
+        has_uat = False
         if keywords:
             for k in keywords:
                 keyw = k.get("keyString", None)
@@ -185,8 +188,11 @@ class Translator(object):
                 if keyw:
                     keyword_list.append(keyw)
                 if keytype == "UAT":
-                    if keyid:
-                        uat_list.append(keyid)
+                    has_uat = True
+                    if keyw:
+                        uat_list.append(keyw)
+        if has_uat:
+            keyword_list = []
         if keyword_list:
             self.output["keywords"] = ", ".join(keyword_list)
         if uat_list:
