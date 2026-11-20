@@ -6,6 +6,25 @@ from bs4 import BeautifulSoup
 from adsmanparse.custom_entity_conversions import ASCII_CUST_MAP
 
 ENTITY_RE = re.compile(r"&([a-zA-Z#][a-zA-Z0-9]+);")
+# DASH_RE to be used on contributor names only
+DASH_RE = re.compile(
+    r"(?:"
+    # decimal code points
+    r"&#(?:173|8208|8209|8210|8211|8212|8213|8231|8259|8722|11834|11835);"
+    # hex code points (case-insensitive hex, optional leading zeros)
+    r"|&#[xX](?:00)?(?:[aA][dD]|201[0-5]|2027|2043|2212|2[eE]3[aAbB]);"
+    # named entities
+    r"|&(?:shy|hyphen|dash|ndash|mdash|horbar|hybull|minus);"
+    # the literal Unicode characters
+    r"|[\u00AD\u2010-\u2015\u2027\u2043\u2212\u2E3A\u2E3B]"
+    # plain ASCII hyphen (so -- and --- collapse too)
+    r"|-{2,3}"
+    r")"
+)
+
+def convert_to_hyphen(text: str) -> str:
+    """Replace any run of dash-like entities/characters with a single '-'."""
+    return DASH_RE.sub("-", text)
 
 
 def has_body(data):
