@@ -4,6 +4,8 @@ from adsenrich.bibcodes import BibcodeGenerator
 
 from adsmanparse.exceptions import NoParsedDataException
 
+from adsmanparse.utils import convert_to_hyphen
+
 fix_ampersand = re.compile(r"(&amp;)(.*?)(;)")
 check_alphanumeric = re.compile(r"[A-Za-z]")
 
@@ -70,12 +72,15 @@ class Translator(object):
                     outname = outname + " " + middle_name
             if suffix:
                 outname = outname + ", " + suffix
+            outname = convert_to_hyphen(outname)
         elif given_name:
-            outname = given_name
+            outname = convert_to_hyphen(given_name)
         elif collab:
             outname = collab
         elif pubraw:
-            outname = pubraw
+            outname = convert_to_hyphen(pubraw)
+        if native:
+            native = convert_to_hyphen(native)
         return outname, native
 
     # INDIVIDUAL AFFIL
