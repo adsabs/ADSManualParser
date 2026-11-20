@@ -9,7 +9,7 @@ _API_RETRY_SLEEP = 1
 DEPRECATED_TITLES = [
     r"^Acknowledgements",
     r"^Index$",
-    r"Index",
+#   r"Index",
     r"^Index\sto\svolume",
     r"^Index\sto\sadverstiser",
     r"^Index\sof\sauthors",
